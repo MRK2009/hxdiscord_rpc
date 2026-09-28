@@ -32,10 +32,10 @@ jobs:
         shell: bash
         run: |
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
-          haxelib dev hxdiscord_rpc .
           cd "$(haxelib libpath hxcpp)/tools/hxcpp"
           haxe compile.hxml
           cd "${{ github.workspace }}"
+          haxelib dev hxdiscord_rpc .
 
       - name: Build Unix
         if: matrix.os == 'macos' || matrix.os == 'ubuntu'
