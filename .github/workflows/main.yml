@@ -30,11 +30,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git && haxelib run hxcpp rebuild --quiet
           haxelib dev hxdiscord_rpc .
-          cd $(haxelib libpath hxcpp)/tools/hxcpp
-          haxe compile.hxml
-          cd ${{github.workspace}}
 
       - name: Build Unix
         if: startsWith(matrix.os, 'macos') || startsWith(matrix.os, 'ubuntu')
