@@ -12,11 +12,11 @@ on:
   workflow_dispatch:
 jobs:
   Job:
-    runs-on: ${{matrix.os}}
+    runs-on: ${{matrix.os}}-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows, macos, ubuntu]
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -38,9 +38,9 @@ jobs:
           cd "${{ github.workspace }}"
 
       - name: Build Unix
-        if: startsWith(matrix.os, 'macos') || startsWith(matrix.os, 'ubuntu')
+        if: matrix.os == 'macos' || matrix.os == 'ubuntu'
         run: cd sample && haxe build-unix.hxml
 
       - name: Build Windows
-        if: startsWith(matrix.os, 'windows')
+        if: matrix.os == 'windows'
         run: cd sample && haxe build-win.hxml
