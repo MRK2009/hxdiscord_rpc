@@ -29,12 +29,11 @@ jobs:
           haxe-version: 4.3.7
 
       - name: Install Dependencies
-        shell: bash
         run: |
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
           cd "$(haxelib libpath hxcpp)/tools/hxcpp"
           haxe compile.hxml
-          cd "${{ github.workspace }}"
+          cd ${{ github.workspace }}
           haxelib dev hxdiscord_rpc .
 
       - name: Build Unix
